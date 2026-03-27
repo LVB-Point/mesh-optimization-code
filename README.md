@@ -31,13 +31,16 @@ Run
 ```bash
 python mesh_optimization.py input.ply
 ```
-If no argument is provided, the script will try to read:input.ply
-
+If no argument is provided, the script will try to read:
+```bash
+input.ply
+```
 ## Output
 
 The optimized point cloud will be saved as:
+```bash
 output.ply
-
+```
 ## Notes
 - The triangulation is performed using 2D projection (XY plane)
 - The optimization is based on numerical gradient descent
