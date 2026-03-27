@@ -1,6 +1,3 @@
-import numpy as np
-from scipy.spatial import Delaunay
-import open3d as o3d
 
 # Calculate the angle of a triangle
 def compute_triangle_angles(A, B, C):
@@ -83,26 +80,6 @@ def compute_normal(A, B, C):
     return normal / norm
     #return normal / np.linalg.norm(normal)
 
-
-# Visualize point clouds and triangles
-def visualize_open3d(points, triangles, title):
-    triangle_lines = []
-    for t in triangles:
-        triangle_lines.append([t[0], t[1]])
-        triangle_lines.append([t[1], t[2]])
-        triangle_lines.append([t[2], t[0]])
-
-    line_set = o3d.geometry.LineSet()
-    line_set.points = o3d.utility.Vector3dVector(points)
-    line_set.lines = o3d.utility.Vector2iVector(triangle_lines)
-    line_set.colors = o3d.utility.Vector3dVector([[0, 0, 1]] * len(triangle_lines))
-
-    point_cloud = o3d.geometry.PointCloud()
-    point_cloud.points = o3d.utility.Vector3dVector(points)
-    point_cloud.colors = o3d.utility.Vector3dVector([[1, 0, 0]] * len(points))  
-
-    print(f"Displaying: {title}")
-    o3d.visualization.draw_geometries([line_set, point_cloud])
 
 # Calculate the distance between the insertion point and the vertex
 def compute_distances_with_vertices(points, A, B, C):
@@ -334,24 +311,3 @@ def optimize_inserted_points_with_distance(original_triangle, inserted_points, i
    
     return inserted_points
 
-
-if __name__ == "__main__":
-
-
-   
-    file_path = "input.ply"
-    
-   
-    vertices, triangles, mesh = load_mesh(file_path)
-
-   
-    optimized_points = process_mesh_with_curvature_and_area(mesh, total_points=3000,)
-
-    all_inserted_points = []
-    all_inserted_points.extend(optimized_points)
-    all_point = np.vstack([vertices,all_inserted_points])
-    point_cloud = o3d.geometry.PointCloud()
-    point_cloud.points = o3d.utility.Vector3dVector(all_point)
-
-    o3d.io.write_point_cloud("output.ply", point_cloud)
-    print("Point cloud has been saved")
