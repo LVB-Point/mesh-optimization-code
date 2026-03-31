@@ -1,55 +1,86 @@
-# Mesh Optimization with Curvature-Aware Point Insertion
+# Core Implementation of Mesh Optimization with Curvature-Aware Point Insertion
 
-This repository contains the implementation of our proposed method for mesh refinement and point cloud optimization.
+This repository provides the **core functions** of our proposed method for mesh refinement and point cloud optimization.
 
 ## Overview
 
-This method performs adaptive point insertion on triangular meshes based on:
+The proposed method focuses on adaptive refinement of triangular meshes through:
 
-- Triangle curvature  
-- Triangle area  
+* Curvature-guided point insertion
+* Area-based refinement strategy
+* Energy-based optimization for point distribution
 
-An energy-based optimization is then applied to improve point distribution, including:
+The optimization improves:
 
-- Area regularization  
-- Distance uniformity  
-- Triangle shape optimization (towards equilateral triangles)  
+* Triangle area regularity
+* Point distribution uniformity
+* Triangle shape quality (towards equilateral triangles)
+
+---
+
+## Code Structure
+
+This repository contains only the **core components** corresponding to the key steps described in the paper:
+
+```text
+core/
+ ├── curvature.py        # curvature estimation
+ ├── insertion.py        # adaptive point insertion
+ ├── optimization.py     # energy-based optimization
+```
+
+Each module is self-contained and reflects the main algorithmic contributions.
+
+---
+
+## Usage
+
+The provided code is intended for **algorithmic reference and understanding**.
+
+Users may integrate these core functions into their own pipelines for:
+
+* Mesh processing
+* Point cloud refinement
+* Geometry optimization
+
+---
+
+## Important Notes
+
+* This repository **does not include a complete runnable pipeline**
+* Data preprocessing, mesh construction, and I/O operations are not provided
+* Some implementation details (e.g., parameter tuning and auxiliary steps) are described in the paper
+
+---
+
+## Reproducibility
+
+The full implementation, including:
+
+* End-to-end pipeline
+* Parameter configurations
+* Experimental data
+
+will be made publicly available upon acceptance of the paper.
+
+---
 
 ## Requirements
 
-Install the required dependencies:
+The core functions are implemented in Python and may require:
 
 ```bash
 pip install numpy scipy open3d
 ```
-## Usage
 
-Prepare your input mesh file in .ply format
-Put it in the same directory as the script
-
-Run
-```bash
-python mesh_optimization.py input.ply
-```
-If no argument is provided, the script will try to read:
-```bash
-input.ply
-```
-## Output
-
-The optimized point cloud will be saved as:
-```bash
-output.ply
-```
-## Notes
-- The triangulation is performed using 2D projection (XY plane)
-- The optimization is based on numerical gradient descent
-- This code is intended for research and academic use
-
-## License
-
-This project is released for academic and research purposes only.
+---
 
 ## Citation
 
-If you use this code, please cite our paper (to be updated after publication).
+If you find this work useful, please cite our paper (to be updated after publication).
+
+---
+
+## License
+
+This project is released for academic research purposes only.
